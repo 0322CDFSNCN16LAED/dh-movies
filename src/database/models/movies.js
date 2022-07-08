@@ -1,6 +1,6 @@
 module.exports= function(sequelize, datatypes){
      const model=sequelize.define("Movies",{
-        id: datatypes.INTEGER,
+     
         title: datatypes.STRING(500),
         rating: datatypes.DECIMAL(3,1),
         length: datatypes.INTEGER,

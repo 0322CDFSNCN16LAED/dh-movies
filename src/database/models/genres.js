@@ -1,6 +1,6 @@
 module.exports= function(sequelize, datatypes){
     const model=sequelize.define("Genres",{
-       id: datatypes.INTEGER,
+      
        name: datatypes.STRING(100),
        ranking: datatypes.INTEGER               
     },{
