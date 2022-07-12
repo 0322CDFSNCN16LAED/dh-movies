@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Nueva Película</title>
+        <link rel="stylesheet" href="/css/style.css" />
+    </head>
+    <body>
+        <figure>
+            <img src="/img/logo-DH.png" alt="Logo Digital House" />
+        </figure>
+        <h1>Nueva Pelicula</h1>
+        <br />
+        <form action="/movies" method="POST">
+            <div>
+                <label>Titulo:
+                    <input type="text" name="title" id="title">
+                </label>
+            </div>
+            <div>
+                <label>Premios:
+                    <input type="number" name="awards" id="awards">
+                </label> 
+            </div>
+            <div>
+                <label>Rating:
+                    <input type="number" name="rating" id="rating">
+                </label>
+            </div>
+            <div>
+                <label>Release date:
+                    <input type="date" name="release_date" id="release_date">
+                </label>
+            </div>
+            <div>
+                <label>Duracion:
+                    <input type="number" name="length" id="length">
+                </label>
+            </div>
+            <button type="submit">CREAR</button>
+        </form>
+    </body>
+</html>

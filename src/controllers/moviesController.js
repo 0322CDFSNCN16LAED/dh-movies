@@ -31,4 +31,13 @@ module.exports = {
             });
         });
     },
+    add: (req, res) =>{
+        res.render("moviesAdd");
+    },
+    create: (req, res) => {
+        db.Movies.create({
+            ...req.body,
+        })
+        res.redirect("/movies");
+    }
 };
