@@ -6,6 +6,7 @@ module.exports = function (sequelize, datatypes) {
             rating: datatypes.DECIMAL(3, 1),
             length: datatypes.INTEGER,
             release_date: datatypes.DATE,
+            awards: datatypes.INTEGER,
         },
         {
             tableName:
