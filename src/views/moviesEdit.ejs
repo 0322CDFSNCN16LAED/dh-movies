@@ -14,28 +14,58 @@
         <br />
         <form action="/movies/<%= pelicula.id %>?_method=PUT" method="POST">
             <div>
-                <label>Titulo:
-                    <input type="text" name="title" id="title" value="<%= pelicula.title %>">
+                <label
+                    >Titulo:
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        value="<%= pelicula.title %>"
+                    />
                 </label>
             </div>
             <div>
-                <label>Premios:
-                    <input type="number" name="awards" id="awards" value="<%= pelicula.awards %>" >
-                </label> 
-            </div>
-            <div>
-                <label>Rating:
-                    <input type="number" name="rating" id="rating" value="<%= pelicula.rating %>">
+                <label
+                    >Premios:
+                    <input
+                        type="number"
+                        name="awards"
+                        id="awards"
+                        value="<%= pelicula.awards %>"
+                    />
                 </label>
             </div>
             <div>
-                <label>Release date:
-                    <input type="date" name="release_date" id="release_date" value="<%= pelicula.release_date %>">
+                <label
+                    >Rating:
+                    <input
+                        type="number"
+                        name="rating"
+                        id="rating"
+                        value="<%= pelicula.rating %>"
+                    />
                 </label>
             </div>
             <div>
-                <label>Duracion:
-                    <input type="number" name="length" id="length" value="<%= pelicula.length %>">
+                <label
+                    >Release date:
+                    <input
+                        type="date"
+                        name="release_date"
+                        id="release_date"
+                        value="<%= getInputDateFormat(pelicula.release_date) %>"
+                    />
+                </label>
+            </div>
+            <div>
+                <label
+                    >Duracion:
+                    <input
+                        type="number"
+                        name="length"
+                        id="length"
+                        value="<%= pelicula.length %>"
+                    />
                 </label>
             </div>
             <button type="submit">EDITAR</button>

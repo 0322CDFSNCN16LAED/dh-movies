@@ -31,31 +31,40 @@ module.exports = {
             });
         });
     },
-    add: (req, res) =>{
+    add: (req, res) => {
         res.render("moviesAdd");
     },
     create: (req, res) => {
         db.Movies.create({
             ...req.body,
-        })
-        .then(function(){
-            res.redirect("/movies")
-        })
+        }).then(function () {
+            res.redirect("/movies");
+        });
     },
-    edit: (req,res) =>{
-        db.Movies.findByPk(req.params.id)
-            .then(function(pelicula){
-                res.render("moviesEdit",{pelicula})
-        })
+    edit: (req, res) => {
+        db.Movies.findByPk(req.params.id).then(function (pelicula) {
+            res.render("moviesEdit", { pelicula });
+        });
     },
-    update: (req,res)=>{
-        db.Movies.update({
-            ...req.body
-        },{
-            where: {id: req.params.id}
-        })
-        .then(function(){
-            res.redirect("/movies/" + req.params.id)
-        })
-    }
+    update: (req, res) => {
+        db.Movies.update(
+            {
+                ...req.body,
+            },
+            {
+                where: { id: req.params.id },
+            }
+        ).then(function () {
+            res.redirect("/movies/" + req.params.id);
+        });
+    },
+    destroy: (req, res) => {
+        db.Movies.destroy({
+            where: {
+                id: req.params.id,
+            },
+        }).then(() => {
+            res.redirect("/movies");
+        });
+    },
 };

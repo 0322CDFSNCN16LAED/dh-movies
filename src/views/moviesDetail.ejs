@@ -15,6 +15,10 @@
         <p>RATING: <%= movie.rating %></p>
         <p>AWARDS: <%= movie.awards %></p>
         <p>LENGTH: <%= movie.length + ' min'%></p>
-        <p>RELEASE DATE: <%= movie.release_date %></p> <a href="/movies/edit/<%= movie.id %>">EDITAR</a>
+        <p>RELEASE DATE: <%= movie.release_date %></p>
+        <button><a href="/movies/edit/<%= movie.id %>">EDITAR</a></button>
+        <form action="/movies/<%= movie.id %>?_method=DELETE" method="POST">
+            <button type="submit">BORRAR</button>
+        </form>
     </body>
 </html>
