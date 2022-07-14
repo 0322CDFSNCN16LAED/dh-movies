@@ -16,6 +16,13 @@
         <p>AWARDS: <%= movie.awards %></p>
         <p>LENGTH: <%= movie.length + ' min'%></p>
         <p>RELEASE DATE: <%= movie.release_date %></p>
+        <p>GENRE: <%= movie.genre ? movie.genre.name : 'Sin género' %></p>
+        <p>ACTORS</p>
+        <ul>
+            <% movie.actors.forEach(actor => { %>
+                <li> <a href="/actors/<%= actor.id %> "><%= actor.first_name %> <%= actor.last_name %></a>  </li>
+            <% }) %>
+        </ul>
         <button><a href="/movies/edit/<%= movie.id %>">EDITAR</a></button>
         <form action="/movies/<%= movie.id %>?_method=DELETE" method="POST">
             <button type="submit">BORRAR</button>

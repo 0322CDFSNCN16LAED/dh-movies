@@ -1,5 +1,5 @@
 module.exports = function (sequelize, datatypes) {
-    const model = sequelize.define(
+    const actor = sequelize.define(
         "Actors",
         {
             rating: datatypes.FLOAT,
@@ -14,5 +14,18 @@ module.exports = function (sequelize, datatypes) {
             updatedAt: "updated_at",
         }
     );
-    return model;
+    actor.associate = (models) => {
+        actor.belongsToMany(models.Movies, {
+            as: 'movies',
+            through: 'actor_movie',
+            foreignKey: 'actor_id',
+            otherKey: 'movie_id',
+            timestamps: false
+        });
+        actor.belongsTo(models.Movies, {
+            as: 'favMovie',
+            foreignKey: 'favorite_movie_id'
+        })
+    }
+    return actor;
 };

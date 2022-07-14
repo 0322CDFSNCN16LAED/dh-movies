@@ -1,5 +1,5 @@
 module.exports = function (sequelize, datatypes) {
-    const model = sequelize.define(
+    const movie = sequelize.define(
         "Movies",
         {
             title: datatypes.STRING(500),
@@ -16,5 +16,20 @@ module.exports = function (sequelize, datatypes) {
             updatedAt: "updated_at",
         }
     );
-    return model;
+    
+    movie.associate = (models) => {
+        movie.belongsTo(models.Genres, {
+            foreignKey: 'genre_id',
+            as: 'genre'
+        });
+        movie.belongsToMany(models.Actors, {
+            as: 'actors',
+            through: 'actor_movie',
+            foreignKey: 'movie_id',
+            otherKey: 'actor_id',
+            timestamps: false
+        });
+    }
+
+    return movie;
 };

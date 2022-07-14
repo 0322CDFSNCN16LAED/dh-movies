@@ -2,12 +2,12 @@ const db = require("../database/models");
 
 module.exports = {
     list: (req, res) => {
-        db.Movies.findAll().then((movies) => {
+        db.Movies.findAll({include:['genre']}).then((movies) => {
             res.render("moviesList", { movies });
         });
     },
     detail: (req, res) => {
-        db.Movies.findByPk(req.params.id).then((movie) => {
+        db.Movies.findByPk(req.params.id, {include:['genre', 'actors']}).then((movie) => {
             res.render("moviesDetail", { movie });
         });
     },

@@ -1,5 +1,5 @@
 module.exports = function (sequelize, datatypes) {
-    const model = sequelize.define(
+    const genre = sequelize.define(
         "Genres",
         {
             name: datatypes.STRING(100),
@@ -13,5 +13,11 @@ module.exports = function (sequelize, datatypes) {
             updatedAt: "updated_at",
         }
     );
-    return model;
+    genre.associate = (models) => {
+        genre.hasMany(models.Movies, {
+            foreignKey: 'genre_id',
+            as: 'movies'
+        });
+    }
+    return genre;
 };
