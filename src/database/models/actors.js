@@ -2,7 +2,6 @@ module.exports = function (sequelize, datatypes) {
     const model = sequelize.define(
         "Actors",
         {
-            name: datatypes.STRING(100),
             rating: datatypes.FLOAT,
             first_name: datatypes.STRING,
             last_name: datatypes.STRING,
