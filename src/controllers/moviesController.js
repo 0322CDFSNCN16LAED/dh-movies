@@ -42,8 +42,8 @@ module.exports = {
         });
     },
     edit: (req, res) => {
-        db.Movies.findByPk(req.params.id).then(function (pelicula) {
-            res.render("moviesEdit", { pelicula });
+        db.Movies.findByPk(req.params.id).then(function (movie) {
+            res.render("moviesEdit", { movie });
         });
     },
     update: (req, res) => {

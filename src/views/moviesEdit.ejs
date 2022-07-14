@@ -10,9 +10,9 @@
         <figure>
             <img src="/img/logo-DH.png" alt="Logo Digital House" />
         </figure>
-        <h1>Editar Pelicula</h1>
+        <h1>Editar Película</h1>
         <br />
-        <form action="/movies/<%= pelicula.id %>?_method=PUT" method="POST">
+        <form action="/movies/<%= movie.id %>?_method=PUT" method="POST">
             <div>
                 <label
                     >Titulo:
@@ -20,7 +20,7 @@
                         type="text"
                         name="title"
                         id="title"
-                        value="<%= pelicula.title %>"
+                        value="<%= movie.title %>"
                     />
                 </label>
             </div>
@@ -31,7 +31,7 @@
                         type="number"
                         name="awards"
                         id="awards"
-                        value="<%= pelicula.awards %>"
+                        value="<%= movie.awards %>"
                     />
                 </label>
             </div>
@@ -42,7 +42,7 @@
                         type="number"
                         name="rating"
                         id="rating"
-                        value="<%= pelicula.rating %>"
+                        value="<%= movie.rating %>"
                     />
                 </label>
             </div>
@@ -53,7 +53,7 @@
                         type="date"
                         name="release_date"
                         id="release_date"
-                        value="<%= getInputDateFormat(pelicula.release_date) %>"
+                        value="<%= getInputDateFormat(movie.release_date) %>"
                     />
                 </label>
             </div>
