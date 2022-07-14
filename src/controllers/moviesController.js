@@ -32,7 +32,12 @@ module.exports = {
         });
     },
     add: (req, res) => {
-        res.render("moviesAdd");
+        db.Genres.findAll()
+            .then((genres) => {
+                res.render("moviesAdd", { genres });
+                
+            })
+
     },
     create: (req, res) => {
         db.Movies.create({
