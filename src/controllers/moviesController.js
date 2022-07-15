@@ -1,13 +1,16 @@
 const db = require("../database/models");
+const movies = require("../database/models/movies");
 
 module.exports = {
     list: (req, res) => {
-        db.Movies.findAll({include:['genre']}).then((movies) => {
+        db.Movies.findAll({ include: ["genre"] }).then((movies) => {
             res.render("moviesList", { movies });
         });
     },
     detail: (req, res) => {
-        db.Movies.findByPk(req.params.id, {include:['genre', 'actors']}).then((movie) => {
+        db.Movies.findByPk(req.params.id, {
+            include: ["genre", "actors"],
+        }).then((movie) => {
             res.render("moviesDetail", { movie });
         });
     },
@@ -32,12 +35,9 @@ module.exports = {
         });
     },
     add: (req, res) => {
-        db.Genres.findAll()
-            .then((genres) => {
-                res.render("moviesAdd", { genres });
-                
-            })
-
+        db.Genres.findAll().then((genres) => {
+            res.render("moviesAdd", { genres });
+        });
     },
     create: (req, res) => {
         db.Movies.create({
@@ -47,29 +47,53 @@ module.exports = {
         });
     },
     edit: (req, res) => {
-        db.Movies.findByPk(req.params.id).then(function (movie) {
-            res.render("moviesEdit", { movie });
+        Promise.all([
+            db.Movies.findByPk(req.params.id, {
+                include: ["genre", "actors"],
+            }),
+            db.Genres.findAll(),
+            db.Actors.findAll(),
+        ]).then(function ([movie, genres, actors]) {
+            res.render("moviesEdit", { movie, genres, actors });
         });
     },
     update: (req, res) => {
-        db.Movies.update(
-            {
+        db.Movies.findByPk(req.params.id).then((movie) => {
+            movie.set({
                 ...req.body,
-            },
-            {
-                where: { id: req.params.id },
+            });
+
+            if (req.file) {
+                movie.image = req.file.filename;
             }
-        ).then(function () {
-            res.redirect("/movies/" + req.params.id);
+
+            movie.save().then(() => {
+                res.redirect("/movies/" + req.params.id);
+            });
         });
     },
     destroy: (req, res) => {
-        db.Movies.destroy({
-            where: {
-                id: req.params.id,
-            },
-        }).then(() => {
-            res.redirect("/movies");
+        db.Movies.findByPk(req.params.id).then((movie) => {
+            movie.setActors([]).then(() => {
+                movie.destroy().then(() => {
+                    res.redirect("/movies");
+                });
+            });
+        });
+    },
+
+    removeActor: (req, res) => {
+        db.Movies.findByPk(req.params.id).then((movie) => {
+            movie.removeActor(req.params.actorId).then(() => {
+                res.redirect("/movies/edit/" + req.params.id);
+            });
+        });
+    },
+    addActor: (req, res) => {
+        db.Movies.findByPk(req.params.id).then((movie) => {
+            movie.addActor(req.body.actorId).then(() => {
+                res.redirect("/movies/edit/" + req.params.id);
+            });
         });
     },
 };

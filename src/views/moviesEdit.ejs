@@ -47,6 +47,17 @@
                 </label>
             </div>
             <div>
+                <label>Género:
+                    <select  name="genre_id" id="genre">
+                     <% genres.forEach(genre => { %>
+                      <option value="<%= genre.id %>" <%= movie.genre?.id == genre.id ? "selected" : "" %>> 
+                        <%= genre.name %>  
+                    </option>
+                     <% }) %>
+                    </select>
+                </label>
+            </div>
+            <div>
                 <label
                     >Release date:
                     <input
@@ -69,6 +80,25 @@
                 </label>
             </div>
             <button type="submit">EDITAR</button>
+
+        </form>
+
+        <h2>Actores en la película</h2>
+        <% movie.actors.forEach(actor => { %>
+         <div style="width: 100%">
+            <%= actor.first_name %> <%= actor.last_name %> 
+            <form action="/movies/<%= movie.id %>/actors/<%= actor.id %>?_method=DELETE" method="POST">
+                <button type="submit">Quitar Actor</button>
+            </form>
+         </div>
+        <% }) %>
+        <form action="/movies/<%= movie.id %>/actors" method="POST">
+            <select name="actorId" id="actorId">
+                <% actors.forEach(actor => { %>
+                    <option value="<%= actor.id %> "><%= actor.first_name %> <%= actor.last_name %> </option>
+                <% }) %>
+            </select>
+            <button type="submit">Agregar actor</button>
         </form>
     </body>
 </html>
